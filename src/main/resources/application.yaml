@@ -1,0 +1,8 @@
+spring:
+  # SecurityProperties
+  security:
+    # InMemoryUserDetailsManager
+    user:
+      name: antony
+      password: liferay
+      roles: admin
