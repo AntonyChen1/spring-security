@@ -89,17 +89,17 @@ PRIMARY KEY (`id`)
 
 insert into `tb_permission`
 (`parent_id`,`name`,`enname`,`url`,`description`,`created`,`updated`) values
-(0,'系统管理','System','/',NULL,NOW(),NOW()),
-(1,'用户管理','SystemUser','/users/',NULL,NOW(),NOW()),
-(2,'查看用户','SystemUserView','',NULL,NOW(),NOW()),
-(2,'新增用户','SystemUserInsert','',NULL,NOW(),NOW()),
-(2,'编辑用户','SystemUserUpdate','',NULL,NOW(),NOW()),
-(2,'删除用户','SystemUserDelete','',NULL,NOW(),NOW()),
-(1,'内容管理','SystemContent','/contents/',NULL,NOW(),NOW()),
-(3,'查看内容','SystemContentView','/contents/view/**',NULL,NOW(),NOW()),
-(3,'新增内容','SystemContentInsert','/contents/insert/**',NULL,NOW(),NOW()),
-(3,'编辑内容','SystemContentUpdate','/contents/update/**',NULL,NOW(),NOW()),
-(3,'删除内容','SystemContentDelete','/contents/delete/**',NULL,NOW(),NOW());
+(0,'System','System','/',NULL,NOW(),NOW()),
+(1,'SystemUser','SystemUser','/users/',NULL,NOW(),NOW()),
+(2,'SystemUserView','SystemUserView','',NULL,NOW(),NOW()),
+(2,'SystemUserInsert','SystemUserInsert','',NULL,NOW(),NOW()),
+(2,'SystemUserUpdate','SystemUserUpdate','',NULL,NOW(),NOW()),
+(2,'SystemUserDelete','SystemUserDelete','',NULL,NOW(),NOW()),
+(1,'SystemContent','SystemContent','/contents/',NULL,NOW(),NOW()),
+(3,'SystemContentView','SystemContentView','/contents/view/**',NULL,NOW(),NOW()),
+(3,'SystemContentInsert','SystemContentInsert','/contents/insert/**',NULL,NOW(),NOW()),
+(3,'SystemContentUpdate','SystemContentUpdate','/contents/update/**',NULL,NOW(),NOW()),
+(3,'SystemContentDelete','SystemContentDelete','/contents/delete/**',NULL,NOW(),NOW());
 ```
 ```sql
 CREATE TABLE `tb_role_permission` (
