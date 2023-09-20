@@ -16,7 +16,6 @@ public class WebSecurityConfig {
 
     @Bean
     public SecurityFilterChain myFilterChain(HttpSecurity http) throws Exception {
-
         http.formLogin(formLogin -> formLogin
                 .loginPage("/login.html")
                 //.usernameParameter("name")
@@ -27,7 +26,13 @@ public class WebSecurityConfig {
         ).logout(logout -> logout
                 .logoutUrl("/mylogout")
                 .logoutSuccessUrl("/logout.html")
-        ).authorizeHttpRequests(au -> au.requestMatchers("/login.html", "/user/login", "/logout.html", "/error.html")
+        ).sessionManagement(s -> s
+                .maximumSessions(2)
+                .maxSessionsPreventsLogin(true) // Default is false, expire the first session
+                .expiredUrl("/sessionTimeout.html") // due to too many sessions for the current user
+        ).authorizeHttpRequests(au -> au.requestMatchers(
+                    "/login.html", "/user/login", "/logout.html",
+                    "/error.html", "sessionTimeout.html")
                 .permitAll()
                 .anyRequest().authenticated()
         ).csrf(c -> c.disable());

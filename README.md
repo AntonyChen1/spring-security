@@ -122,6 +122,49 @@ insert into `tb_role_permission`(`role_id`,`permission_id`) values
 (1,10),
 (1,11);
 ```
+### 6. Default value when login by form
+```java
+public class UsernamePasswordAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
+	public static final String SPRING_SECURITY_FORM_USERNAME_KEY = "username";
+	public static final String SPRING_SECURITY_FORM_PASSWORD_KEY = "password";
+    private boolean postOnly = true;
+```
+
+### 7. Tomcat session timeout, minimum 60s, default 30m
+```java
+private long getSessionTimeoutInMinutes() {
+    Duration sessionTimeout = getSession().getTimeout();
+    if (isZeroOrLess(sessionTimeout)) {
+        return 0;
+    }
+    return Math.max(sessionTimeout.toMinutes(), 1);
+}
+```
+```java
+package org.springframework.boot.web.servlet.server;
+
+public class Session {
+	@DurationUnit(ChronoUnit.SECONDS)
+	private Duration timeout = Duration.ofMinutes(30);
+```
+### 8. When login users exceed the maximum, throw excdption or expire the previous
+```java
+if (this.exceptionIfMaximumExceeded || (sessions == null)) {
+    throw new SessionAuthenticationException(
+            this.messages.getMessage("ConcurrentSessionControlAuthenticationStrategy.exceededAllowed",
+                    new Object[] { allowableSessions }, "Maximum sessions of {0} for this principal exceeded"));
+}
+```
+```java
+List<SessionInformation> sessionsToBeExpired = sessions.subList(0, maximumSessionsExceededBy);
+for (SessionInformation session : sessionsToBeExpired) {
+    session.expireNow();
+}
+```
+
+
+
+
 
 ### Hot keys
 - Ctrl + Shift + n: search file

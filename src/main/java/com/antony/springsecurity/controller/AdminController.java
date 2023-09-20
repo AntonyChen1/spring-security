@@ -11,6 +11,8 @@ public class AdminController {
     public String demo(){
         return "Create a demo by Antony\n" +
                 "<br/>\n" +
+                "<a href=\"/main.html\">main page</a>" +
+                "<br/>\n" +
                 "<a href=\"/mylogout\">logout</a>";
     }
 }
