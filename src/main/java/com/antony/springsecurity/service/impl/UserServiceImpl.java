@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,10 +33,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
         User user = getByUsername(username);
         List<GrantedAuthority> authorities = new ArrayList<>();
+        System.out.println("loadUserByUsername of username: " + username);
         if(user!=null){
+            System.out.println(MessageFormat.format
+                    ("Password: {0}", user.getPassword()));
+
             List<Permission> permissions = permissionRepository.selectByUserId(user.getId());
 
             permissions.forEach(permission -> {
