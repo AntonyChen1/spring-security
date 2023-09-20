@@ -161,7 +161,20 @@ for (SessionInformation session : sessionsToBeExpired) {
     session.expireNow();
 }
 ```
-
+### 9. Remember me
+`org.springframework.jdbc.BadSqlGrammarException: PreparedStatementCallback; bad SQL grammar [insert into persistent_logins (username, series, token, last_used) values(?,?,?,?)]`
+```java
+RememberMeAuthenticationFilter
+    Authentication rememberMeAuth = this.rememberMeServices.autoLogin(request, response);
+```
+```sql
+create table persistent_logins (
+username varchar(64) not null,
+series varchar(64) primary key,
+token varchar(64) not null,
+last_used timestamp not null
+)
+```
 
 
 
