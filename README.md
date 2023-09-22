@@ -175,7 +175,37 @@ token varchar(64) not null,
 last_used timestamp not null
 )
 ```
-
+### 10. Logout
+- default url
+```java
+public final class LogoutConfigurer<H extends HttpSecurityBuilder<H>>
+		extends AbstractHttpConfigurer<LogoutConfigurer<H>, H> {
+	private List<LogoutHandler> logoutHandlers = new ArrayList<>();
+	private SecurityContextLogoutHandler contextLogoutHandler = new SecurityContextLogoutHandler();
+	private String logoutSuccessUrl = "/login?logout";
+	private LogoutSuccessHandler logoutSuccessHandler;
+	private String logoutUrl = "/logout";
+```
+- customer url
+```java
+http.logout(logout -> logout
+  .logoutUrl("/mylogout")
+  .logoutSuccessUrl("/logout.html")
+```
+- logout handler
+```java
+public class SecurityContextLogoutHandler implements LogoutHandler {
+  public void logout(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
+    session.invalidate();
+    context.setAuthentication(null);
+```
+- Customize what to do when logout successfully
+```java
+public interface LogoutSuccessHandler {
+	void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication)
+			throws IOException, ServletException;
+}
+```
 
 
 
