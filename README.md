@@ -206,8 +206,9 @@ public interface LogoutSuccessHandler {
 			throws IOException, ServletException;
 }
 ```
-
-
+### 11. Enable csrf (cross site request forgery)
+- Login should add hidden input _csrf.token
+- Logout can't use get method
 
 ### Hot keys
 - Ctrl + Shift + n: search file
